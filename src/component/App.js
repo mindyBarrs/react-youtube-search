@@ -3,13 +3,15 @@ import React from "react";
 /* COMPONENTS */
 import SearchBar from "./SearchBar/SearchBar";
 import VideoList from "./VideoList/VideoList";
+import VideoDetail from "./VideoDetail/VideoDetail";
 
 /* API */
 import youtube from "../apis/youtube";
 
 class App extends React.Component {
     state = {
-        videos: []
+        videos: [],
+        selectedViceo: null
     }
 
     onTermSubmit = async term => {
@@ -24,12 +26,18 @@ class App extends React.Component {
         });
     };
 
+    onVideoSelect = ( video ) => {
+        console.log("from the app", video);
+    }
+
     render() {
         return(
             <div className="ui container">
                 <SearchBar onFormSubmit={ this.onTermSubmit } />
 
-                <VideoList videos={ this.state.videos } />
+                <VideoList onVideoSelect={ this.onVideoSelect } videos={ this.state.videos } />
+
+                <VideoDetail />
             </div>
         );
     }
