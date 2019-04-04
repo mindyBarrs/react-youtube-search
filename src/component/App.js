@@ -11,7 +11,7 @@ import youtube from "../apis/youtube";
 class App extends React.Component {
     state = {
         videos: [],
-        selectedViceo: null
+        selectedVideo: null
     }
 
     onTermSubmit = async term => {
@@ -27,17 +27,17 @@ class App extends React.Component {
     };
 
     onVideoSelect = ( video ) => {
-        console.log("from the app", video);
+        this.setState({ selectedVideo: video });
     }
 
     render() {
         return(
             <div className="ui container">
                 <SearchBar onFormSubmit={ this.onTermSubmit } />
+                
+                <VideoDetail video={ this.state.selectedVideo } />
 
                 <VideoList onVideoSelect={ this.onVideoSelect } videos={ this.state.videos } />
-
-                <VideoDetail />
             </div>
         );
     }
